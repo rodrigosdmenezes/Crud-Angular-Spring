@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Routes } from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
+const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'courses' },
+  {
+    path: 'courses',
+    loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule)
+  }
+];
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Routes } from '@angular/router';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [
     MatToolbarModule, 
     RouterOutlet,
-    HttpClientModule
   ]
 })
 export class AppComponent {

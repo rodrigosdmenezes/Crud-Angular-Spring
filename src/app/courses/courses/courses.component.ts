@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Course } from '../model/course';
 import { AppMaterialModule } from '../../shared/app-material/app-material.module';
+import { CoursesService } from '../services/courses.service';
 
 
 @Component({
@@ -13,13 +14,11 @@ import { AppMaterialModule } from '../../shared/app-material/app-material.module
 
 export class CoursesComponent {
 
-  courses: Course[] = [
-    {_id: '1', name: 'Angular', category: 'Front End'}
-  ];
+  courses: Course[] = [];
   displayedColumns = ['name', 'category'];
 
-  constructor(){
-    //this.courses = [];
+  constructor(private coursesService: CoursesService){
+    this.courses = this.coursesService.list();
   }
 
   ngOnInit():void{

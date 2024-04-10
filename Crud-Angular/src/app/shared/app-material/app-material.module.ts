@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule} from '@angular/material/input'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 
@@ -27,7 +29,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatCardModule,
     MatDividerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSnackBarModule
   ],
 })
 export class AppMaterialModule { }

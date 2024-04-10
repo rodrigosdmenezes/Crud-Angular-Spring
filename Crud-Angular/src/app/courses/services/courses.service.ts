@@ -13,7 +13,11 @@ export class CoursesService {
   constructor(private httpClient: HttpClient) { }
 
   list() {
-    return this.httpClient.get<Course[]>(this.API);
+    return this.httpClient.get<Course[]>(this.API)
+  }
+
+  save(record: Course){
+    
   }
 
 }

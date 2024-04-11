@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { AppMaterialModule } from '../../shared/app-material/app-material.module';
-import { CoursesService } from '../services/courses.service';
+import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
+import { CoursesService } from '../../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { config } from 'process';
 import { Location } from '@angular/common';
 
  // Importe o ReactiveFormsModule
@@ -21,14 +20,14 @@ export class CourseFormComponent {
 
   form: FormGroup;
 
-  constructor(private formbuilder: FormBuilder,
+  constructor(private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
     private location: Location
   ) {
-    this.form = this.formbuilder.group({
-      name: [null],
-      category:[null]
+    this.form = this.formBuilder.group({
+      name: [''],
+      category:['']
     });
   }
 
@@ -48,7 +47,7 @@ export class CourseFormComponent {
   }
 
   private onSucces(){
-    this.snackBar.open('Curso salvo!', '', { duration: 10000 });
+    this.snackBar.open('Curso salvo!', '', { duration: 1000 });
     this.onCancel();
   }
 

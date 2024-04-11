@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AppMaterialModule } from '../../shared/app-material/app-material.module';
 import { CoursesService } from '../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { config } from 'process';
+import { Location } from '@angular/common';
+
  // Importe o ReactiveFormsModule
-
-
 @Component({
   selector: 'app-course-form',
   standalone: true,
@@ -22,7 +23,8 @@ export class CourseFormComponent {
 
   constructor(private formbuilder: FormBuilder,
     private service: CoursesService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private location: Location
   ) {
     this.form = this.formbuilder.group({
       name: [null],
@@ -30,16 +32,28 @@ export class CourseFormComponent {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     this.service.save(this.form.value)
-    .subscribe(next: result => console.log(message: result), error: error =>{
-      this.snackBar.open('Erro ao salvar Curso')
-    });
+      .subscribe({
+        next: (result: any) => {
+          this.onSucces();
+        },
+        error: (error: any) => {
+          this.onError();
+        }
+      });
+  }
+  onCancel(){
+    this.location.back();
   }
 
-  onCancel(){
+  private onSucces(){
+    this.snackBar.open('Curso salvo!', '', { duration: 10000 });
+    this.onCancel();
+  }
 
+  private onError(){
+    this.snackBar.open('Erro ao salvar Curso', '', { duration: 5000 });
   }
 
 }
-

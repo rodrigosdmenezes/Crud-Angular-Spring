@@ -4,7 +4,12 @@
   </mat-toolbar>
 
   <div class="column-flex">
-    <app-courses-list *ngIf="courses$ | async as courses; else loading" [courses]="courses" (add)="onAdd()">
+    <app-courses-list *ngIf="courses$ | async as courses;
+    else loading" [courses]="courses"
+     (add)="onAdd()"
+     (edit)="onEdit($event)"
+     (remove)="onRemove($event)"
+     >
     </app-courses-list>
 
     <ng-template #loading>

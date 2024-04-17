@@ -11,9 +11,12 @@
 
   <!-- Category Column -->
   <ng-container matColumnDef="category">
-    <mat-header-cell *matHeaderCellDef> Categoria. </mat-header-cell>
-    <mat-cell *matCellDef="let course"> {{ course.category }}
-      <mat-icon aria-hidden="false" aria-label="Category do Curso"> {{ course.category | category }} </mat-icon>
+    <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+    <mat-cell *matCellDef="let course">
+      {{ course.category }}
+      <mat-icon aria-hidden="false" aria-label="Categoria do Curso">{{
+        course.category | category
+      }}</mat-icon>
     </mat-cell>
   </ng-container>
 
@@ -27,11 +30,11 @@
 
     <mat-cell *matCellDef="let course" class="action-column">
       <button mat-icon-button color="primary" aria-label="Editar um curso">
-        <mat-icon>edit</mat-icon>
+        <mat-icon (click)="onEdit(course)">edit</mat-icon>
       </button>
 
       <button mat-icon-button color="warn" aria-label="Remover um curso">
-        <mat-icon>delete</mat-icon>
+        <mat-icon (click)="onDelete(course)">delete</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

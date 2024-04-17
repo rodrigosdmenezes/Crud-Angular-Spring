@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
 import { CoursesService } from '../../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Course } from '../../model/course';
 
- // Importe o ReactiveFormsModule
+// Importe o ReactiveFormsModule
 @Component({
   selector: 'app-course-form',
   standalone: true,
@@ -30,8 +30,11 @@ export class CourseFormComponent {
   ) {
     this.form = this.formBuilder.group({
       _id: [''],
-      name: [''],
-      category:[''],
+      name: ['', [Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100)
+      ]],
+      category: ['', [Validators.required]],
     });
   }
 
@@ -56,17 +59,35 @@ export class CourseFormComponent {
     })
   }
 
-  onCancel(){
+  onCancel() {
     this.location.back();
   }
 
-  private onSucces(){
+  private onSucces() {
     this.snackBar.open('Curso salvo!', '', { duration: 1000 });
     this.onCancel();
   }
 
-  private onError(){
+  private onError() {
     this.snackBar.open('Erro ao salvar Curso', '', { duration: 5000 });
   }
 
+  getErrorMessage(fildName: string) {
+    const field = this.form.get(fildName);
+
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório'
+    }
+
+    if (field?.hasError('minlength')) {
+      const requiredLength: number = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      return `Tamanho mínimo precisa ser de ${requiredLength} caracteres.`;
+    }
+
+    if (field?.hasError('maxlength')) {
+      const requiredLength: number = field.errors ? field.errors['maxlength']['requiredLength'] : 200;
+      return `Tamanho máximo exedido de ${requiredLength} caracteres.`;
+    }
+    return 'Campo inválido';
+  }
 }
